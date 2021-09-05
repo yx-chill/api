@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('music')->namespace('Music')->group(function () {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::post('refresh', 'AuthController@refresh');
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@me');
+    });
 });
