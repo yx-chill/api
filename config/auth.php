@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'music' => [
+            'driver' => 'passport',
+            'provider' => 'music',
+        ],
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
@@ -67,6 +71,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+
+        'music' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Music\Admin::class,
         ],
 
         // 'users' => [
