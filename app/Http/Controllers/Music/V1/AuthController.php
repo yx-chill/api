@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Music\Login;
 use App\Http\Requests\Music\Register;
 use App\Models\Client;
-use App\Models\Music\Admin;
+use App\Models\Music\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -17,7 +17,7 @@ class AuthController extends Controller
 	{
 		$input = $request->validated();
 
-		Admin::create($input);
+		User::create($input);
 
 		return response()->json([
 			'status' => true,
@@ -27,7 +27,7 @@ class AuthController extends Controller
 
 	public function login(Login $request)
 	{
-		$client = Client::where('name', 'music')->where('password_client', true)->first();
+		$client = Client::where('name', 'music_user')->where('password_client', true)->first();
 
 		if (!$client) {
 			response()->json([
@@ -56,7 +56,7 @@ class AuthController extends Controller
 
 	public function refresh(Request $request)
 	{
-		$client = Client::where('name', 'music')->where('password_client', true)->first();
+		$client = Client::where('name', 'music_user')->where('password_client', true)->first();
 
 		if (!$client) {
 			response()->json([
@@ -94,12 +94,13 @@ class AuthController extends Controller
 
 	public function me()
 	{
-		$admin = Auth::user();
+		$user = Auth::user();
+
 		return response()->json([
 			'status' => true,
 			'data' => [
-				'name' => $admin->name,
-				'email' => $admin->email
+				'name' => $user->name,
+				'email' => $user->email
 			]
 		]);
 	}
