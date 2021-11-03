@@ -25,17 +25,8 @@ class MusicTypeController extends Controller
 		]);
 	}
 
-	public function update(MusicTypeReq $request, $id)
+	public function update(MusicTypeReq $request, MusicType $musicType)
 	{
-		$musicType = MusicType::find($id);
-
-		if (!$musicType) {
-			return response()->json([
-				'status' => false,
-				'message' => '資料不存在'
-			], 404);
-		}
-
 		$musicType->update($request->validated());
 
 		return response()->json([
@@ -44,28 +35,10 @@ class MusicTypeController extends Controller
 		]);
 	}
 
-	public function destroy($id)
+	public function destroy(MusicType $musicType)
 	{
-		$musicType = MusicType::with('musics')->find($id);
-
-		if (!$musicType) {
-			return response()->json([
-				'status' => false,
-				'message' => '資料不存在'
-			], 404);
-		}
-
-		if ($musicType->musics->isNotEmpty()) {
-			return response()->json([
-				'status' => false,
-				'message' => '尚有關聯資源，無法刪除'
-			], 400);
-		}
-
-		MusicType::destroy($id);
-
 		return response()->json([
-			'status' => true
+			'status' => $musicType->delete()
 		]);
 	}
 }

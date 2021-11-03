@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/.htaccess
+/public/upload
 /storage/*.key
 /vendor
 .env

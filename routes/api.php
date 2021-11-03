@@ -32,7 +32,7 @@ Route::prefix('music/v1')->namespace('Music\V1')->group(function () {
 
 		Route::middleware('auth:music_admin')->group(function () {
 			Route::apiresource('music-type', MusicTypeController::class);
-			Route::apiResource('musics', MusicController::class);
+			Route::apiResource('music', MusicController::class);
 			Route::get('logout', 'AuthController@logout');
 			Route::get('user', 'AuthController@me');
 		});

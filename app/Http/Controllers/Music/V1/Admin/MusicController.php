@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Music\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Music\Music as MusicReq;
 use App\Models\Music\Music;
 use Illuminate\Http\Request;
 
@@ -24,22 +25,20 @@ class MusicController extends Controller
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(Request $request)
+	public function store(MusicReq $request)
 	{
-		return response()->json([
-			'test' => 'test'
-		]);
-	}
+		$music = Music::create($request->validated());
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show($id)
-	{
-		//
+		if ($request->hasFile('file')) {
+			$music->update([
+				'file' => $this->fileUpload('music', 'music', $request->file('file'))
+			]);
+		}
+
+		return response()->json([
+			'status' => true,
+			'data' => $music
+		]);
 	}
 
 	/**
@@ -49,7 +48,7 @@ class MusicController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function update(Request $request, $id)
+	public function update(Request $request, Music $music)
 	{
 		//
 	}
@@ -60,7 +59,7 @@ class MusicController extends Controller
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy($id)
+	public function destroy(Music $music)
 	{
 		//
 	}
