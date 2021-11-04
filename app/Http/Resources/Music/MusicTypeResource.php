@@ -11,8 +11,8 @@ class MusicTypeResource extends JsonResource
 		return [
 			'id' => $this->id,
 			'name' => $this->name,
-			'sort' => $this->sort,
-			'status' => $this->status
+			'sort' => $this->sort ?? 0,
+			'status' => $this->status ?? true
 		];
 	}
 }

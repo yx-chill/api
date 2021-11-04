@@ -12,7 +12,7 @@ class MusicType extends Model
 		'sort',
 		'status'
 	];
-	protected $cast = [
+	protected $casts = [
 		'status' => 'boolean'
 	];
 

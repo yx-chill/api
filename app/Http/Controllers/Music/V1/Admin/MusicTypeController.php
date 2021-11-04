@@ -19,9 +19,11 @@ class MusicTypeController extends Controller
 
 	public function store(MusicTypeReq $request)
 	{
+		$musicType = MusicType::create($request->validated());
+
 		return response()->json([
 			'status' => true,
-			'data' => MusicType::create($request->validated())
+			'data' => new MusicTypeResource($musicType)
 		]);
 	}
 
@@ -31,7 +33,7 @@ class MusicTypeController extends Controller
 
 		return response()->json([
 			'status' => true,
-			'data' => $musicType
+			'data' => new MusicTypeResource($musicType)
 		]);
 	}
 

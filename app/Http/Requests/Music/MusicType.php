@@ -23,26 +23,17 @@ class MusicType extends FormRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method()) {
-			case 'POST':
-				return [
-					'name' => 'required|string|min:3|max:15',
-					'sort' => 'nullable|integer|min:0|max:255',
-					'status' => 'nullable|boolean'
-				];
-			case 'PUT':
-				return [
-					'name' => 'required|string|min:3|max:15',
-					'sort' => 'required|integer|min:0|max:255',
-					'status' => 'required|boolean'
-				];
-		}
+		return [
+			'name' => 'required|string|min:3|max:15',
+			'sort' => 'nullable|integer|min:0|max:255',
+			'status' => 'nullable|boolean'
+		];
 	}
 
 	public function attributes()
 	{
 		return [
-			'name' => '名稱',
+			'name' => '曲風',
 			'sort' => '排序',
 			'status' => '狀態'
 		];

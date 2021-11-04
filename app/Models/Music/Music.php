@@ -3,7 +3,6 @@
 namespace App\Models\Music;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class Music extends Model
 {
@@ -13,15 +12,11 @@ class Music extends Model
 		'name',
 		'composer',
 		'file',
+		'image',
 		'sort',
 		'status'
 	];
-	protected $cast = [
+	protected $casts = [
 		'status' => 'boolean'
 	];
-
-	public function getFileAttribute($value)
-	{
-		return Storage::disk('music')->url($value);
-	}
 }
