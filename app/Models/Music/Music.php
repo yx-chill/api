@@ -19,4 +19,9 @@ class Music extends Model
 	protected $casts = [
 		'status' => 'boolean'
 	];
+
+	public function musicType()
+	{
+		return $this->belongsTo(MusicType::class);
+	}
 }

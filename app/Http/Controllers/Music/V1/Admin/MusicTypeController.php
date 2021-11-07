@@ -27,6 +27,14 @@ class MusicTypeController extends Controller
 		]);
 	}
 
+	public function show(MusicType $musicType)
+	{
+		return response()->json([
+			'status' => true,
+			'data' => new MusicTypeResource($musicType)
+		]);
+	}
+
 	public function update(MusicTypeReq $request, MusicType $musicType)
 	{
 		$musicType->update($request->validated());
@@ -39,6 +47,13 @@ class MusicTypeController extends Controller
 
 	public function destroy(MusicType $musicType)
 	{
+		if ($musicType->musics->isNotEmpty()) {
+			return response()->json([
+				'status' => false,
+				'message' => '尚有該曲風的音樂存在'
+			]);
+		}
+
 		return response()->json([
 			'status' => $musicType->delete()
 		]);

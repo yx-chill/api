@@ -37,6 +37,14 @@ class MusicController extends Controller
 		]);
 	}
 
+	public function show(Music $music)
+	{
+		return response()->json([
+			'status' => true,
+			'data' => new MusicResource($music)
+		]);
+	}
+
 	public function update(MusicReq $request, Music $music)
 	{
 		$input = $request->validated();

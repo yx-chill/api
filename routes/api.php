@@ -20,6 +20,11 @@ Route::prefix('music/v1')->namespace('Music\V1')->group(function () {
 	Route::post('login', 'AuthController@login');
 	Route::post('refresh', 'AuthController@refresh');
 
+	Route::get('music-type', 'MusicTypeController@index');
+	Route::get('music-type/{musicType}', 'MusicTypeController@show');
+	Route::get('music', 'MusicController@index');
+	Route::get('music/{music}', 'MusicController@show');
+
 	Route::middleware('auth:music_user')->group(function () {
 		Route::get('logout', 'AuthController@logout');
 		Route::get('user', 'AuthController@me');
