@@ -25,7 +25,7 @@ class Register extends FormRequest
 	{
 		return [
 			'name' => 'required|string|min:3|max:10',
-			'email' => 'required|email|min:3|max:50|unique:music_admins',
+			'email' => 'required|email|min:3|max:50|unique:music_users',
 			'password' => 'required|string|min:6|max:32|confirmed',
 			'password_confirmation' => 'required|string|min:6|max:32'
 		];
