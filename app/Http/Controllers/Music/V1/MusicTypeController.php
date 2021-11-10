@@ -13,7 +13,7 @@ class MusicTypeController extends Controller
 		return response()->json([
 			'status' => true,
 			'data' => MusicTypeResource::collection(
-				MusicType::where('status', true)->orderBy('sort', 'desc')->get(['id', 'name'])
+				MusicType::where('status', true)->orderBy('sort', 'desc')->get(['id', 'name', 'color'])
 			)
 		]);
 	}

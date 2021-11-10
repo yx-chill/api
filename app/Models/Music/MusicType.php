@@ -9,6 +9,7 @@ class MusicType extends Model
 	protected $table = 'music_music_types';
 	protected $fillable = [
 		'name',
+		'color',
 		'sort',
 		'status'
 	];

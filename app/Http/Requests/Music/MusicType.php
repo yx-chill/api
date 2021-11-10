@@ -25,6 +25,7 @@ class MusicType extends FormRequest
 	{
 		return [
 			'name' => 'required|string|min:3|max:15',
+			'color' => ['required', 'max:7', 'regex:/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/'],
 			'sort' => 'nullable|integer|min:0|max:255',
 			'status' => 'nullable|boolean'
 		];
@@ -34,6 +35,7 @@ class MusicType extends FormRequest
 	{
 		return [
 			'name' => '曲風',
+			'color' => '顏色',
 			'sort' => '排序',
 			'status' => '狀態'
 		];
