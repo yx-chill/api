@@ -9,7 +9,7 @@ class MusicResource extends JsonResource
 {
 	public function toArray($request)
 	{
-		if ($request->is('music/*/admin/music')) {
+		if ($request->is('music/*/admin/music') || $request->is('music/*/admin/music/*')) {
 			return [
 				'id' => $this->id,
 				'music_type_id' => $this->music_type_id,
