@@ -24,4 +24,9 @@ class Music extends Model
 	{
 		return $this->belongsTo(MusicType::class);
 	}
+
+	public function musicLikes()
+	{
+		return $this->hasMany(MusicLike::class);
+	}
 }

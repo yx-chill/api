@@ -46,6 +46,9 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::pattern('music', '[0-9]+');
+        Route::pattern('musicType', '[0-9]+');
     }
 
     /**

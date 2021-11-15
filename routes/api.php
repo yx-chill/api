@@ -26,6 +26,9 @@ Route::prefix('music/v1')->namespace('Music\V1')->group(function () {
 	Route::get('music/{music}', 'MusicController@show');
 
 	Route::middleware('auth:music_user')->group(function () {
+		Route::get('music/like', 'MusicController@likeList');
+		Route::get('music/{music}/like', 'MusicController@like');
+		Route::get('music/{music}/unlike', 'MusicController@unlike');
 		Route::get('logout', 'AuthController@logout');
 		Route::get('user', 'AuthController@me');
 	});
