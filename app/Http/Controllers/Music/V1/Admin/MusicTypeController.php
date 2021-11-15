@@ -51,7 +51,7 @@ class MusicTypeController extends Controller
 			return response()->json([
 				'status' => false,
 				'message' => '尚有該曲風的音樂存在'
-			]);
+			], 400);
 		}
 
 		return response()->json([
