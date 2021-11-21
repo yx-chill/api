@@ -14,21 +14,26 @@ class MusicController extends Controller
 	public function index(Request $request)
 	{
 		// 取得搜尋字串
-		$search = $request->input('search', '');
+		$search = $request->query('search', '');
+
+		// 取得搜尋曲風
+		$type = $request->query('type', '');
 
 		// 排序欄位
-		$orderBy = $request->input('order', 'sort');
+		$orderBy = $request->query('order', 'sort');
 
 		// 升降冪
-		$sort = $request->input('sort', 'asc');
+		$sort = $request->query('sort', 'asc');
 
 		// 每頁筆數
 		$limit = (int) $request->input('limit', 18);
 
 		return MusicResource::collection(
 			Music::withCount('musicLikes')->with('musicType:id,name')
-				->whereHas('musicType', function ($query) {
-					$query->where('status', true);
+				->whereHas('musicType', function ($query) use ($type) {
+					$query->where('status', true)->when($type, function ($query) use ($type) {
+						$query->where('id', $type);
+					});
 				})
 				->when($search, function ($query) use ($search) {
 					$query->where('name', 'like', "%{$search}%")->orWhere('composer', 'like', "%{$search}%");
@@ -93,8 +98,8 @@ class MusicController extends Controller
 			Music::with(['musicLikes', 'musicType:id,name'])->whereHas('musicLikes', function ($query) use ($user) {
 				$query->where('user_id', $user->id);
 			})->whereHas('musicType', function ($query) {
-					$query->where('status', true);
-				})->where('status', true)->orderBy('sort')->paginate($limit)->withQueryString()
+				$query->where('status', true);
+			})->where('status', true)->orderBy('sort')->paginate($limit)->withQueryString()
 		);
 	}
 }
