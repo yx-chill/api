@@ -24,7 +24,7 @@ class MusicType extends FormRequest
 	public function rules()
 	{
 		return [
-			'name' => 'required|string|min:3|max:15',
+			'name' => 'required|string|min:2|max:15',
 			'color' => ['required', 'max:7', 'regex:/^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$/'],
 			'sort' => 'nullable|integer|min:0|max:255',
 			'status' => 'nullable|boolean'
