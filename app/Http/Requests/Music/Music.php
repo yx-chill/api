@@ -29,7 +29,7 @@ class Music extends FormRequest
 					'music_type_id' => 'required|exists:music_music_types,id',
 					'name' => 'required|string|min:3|max:20',
 					'composer' => 'required|string|min:3|max:20',
-					'file' => 'required|file|mimetypes:audio/mpeg|max:5120',
+					'file' => 'required|file|max:5120',
 					'image' => 'nullable|file|max:2048',
 					'sort' => 'nullable|integer|min:0|max:255',
 					'status' => 'nullable|boolean'
@@ -39,7 +39,7 @@ class Music extends FormRequest
 					'music_type_id' => 'required|exists:music_music_types,id',
 					'name' => 'required|string|min:3|max:20',
 					'composer' => 'required|string|min:3|max:20',
-					'file' => 'nullable|file|mimetypes:audio/mpeg|max:5120',
+					'file' => 'nullable|file|max:5120',
 					'image' => 'nullable|file|max:2048',
 					'sort' => 'nullable|integer|min:0|max:255',
 					'status' => 'nullable|boolean'
