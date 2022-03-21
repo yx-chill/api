@@ -38,7 +38,7 @@ class MusicController extends Controller
 				->when($search, function ($query) use ($search) {
 					$query->where('name', 'like', "%{$search}%")->orWhere('composer', 'like', "%{$search}%");
 				})
-				->where('status', true)->orderBy($orderBy, $sort)->paginate($limit)->withQueryString()
+				->where('status', true)->orderBy($orderBy, $sort)->orderBy('id', 'desc')->paginate($limit)->withQueryString()
 		);
 	}
 
@@ -99,7 +99,7 @@ class MusicController extends Controller
 				$query->where('user_id', $user->id);
 			})->whereHas('musicType', function ($query) {
 				$query->where('status', true);
-			})->where('status', true)->orderBy('sort')->paginate($limit)->withQueryString()
+			})->where('status', true)->orderBy('sort')->orderBy('id', 'desc')->paginate($limit)->withQueryString()
 		);
 	}
 }
